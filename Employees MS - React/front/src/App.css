@@ -1,0 +1,35 @@
+body{
+  background-image: url("./resources/background-content.svg");
+}
+
+textarea {
+  resize: none;
+}
+
+.logo{
+  border-radius: 100%;
+  background-color: rgb(209, 209, 209);
+  border: 1px solid gray;
+  margin-bottom: 25px;
+}
+
+input::placeholder{
+  color: black;
+}
+
+.card{
+  background-color: white;
+  border-radius: 5px;
+  padding: 25px;
+  margin: 25px 50px 25px 50px;
+  box-shadow: 2px 2px 2px 2px gray;
+  text-align: center;
+}
+
+@media only screen and (max-width: 400px)
+{
+  .card{
+    margin: 10px;
+    padding: 10px;
+  }
+}
