@@ -1,20 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View, Image, Button } from 'react-native';
-import { Link } from "react-native-router";
 
-export default function MainMenu() {
+export default function MainMenu({navigation}) {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../resources/employee.png")}/>
       <View style={{marginBottom: "25px"}}>
-        <Link to="/employees">
-          <Button title="EMPLOYEES MENU"/>
-        </Link>
+        <Button title="EMPLOYEES MENU" onPress={() => navigation.navigate('Employees Menu')}/>
       </View>
-      <Link to="/projects">
-        <Button title="PROJECTS MENU"/>
-      </Link>
+      <Button title="PROJECTS MENU" onPress={() => navigation.navigate('Projects Menu')}/>
       <StatusBar style="auto" />
     </View>
   );
@@ -22,8 +17,8 @@ export default function MainMenu() {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: "50px",
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
