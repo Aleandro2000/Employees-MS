@@ -47,6 +47,7 @@ export default function UpdateProject() {
   
   const handleSubmit=async () => {
     if(_id&&project_name&&validateDate(start_date)&&validateDate(planned_end_date)&&project_code)
+    {
       await mutation({variables: {
         _id: _id,
         project_name: project_name.trim(),
@@ -57,6 +58,8 @@ export default function UpdateProject() {
       }})
         .then(response => setMessage("Succeeded!"))
         .catch(err => setMessage(err.message));
+      window.location.reload(false);
+    }
     else
       setMessage("Please fill all input boxes or check them if they are correct!");
   }

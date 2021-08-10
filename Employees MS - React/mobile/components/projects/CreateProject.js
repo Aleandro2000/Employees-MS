@@ -34,6 +34,7 @@ export default function CreateProject() {
   
   const handleSubmit=async () => {
     if(project_name&&validateDate(start_date)&&validateDate(planned_end_date)&&project_code)
+    {
       await mutation({variables: {
         project_name: project_name.trim(),
         start_date: convertDate(start_date),
@@ -43,6 +44,8 @@ export default function CreateProject() {
       }})
         .then(response => setMessage("Succeeded!"))
         .catch(err => setMessage(err.message));
+      window.location.reload(false);
+    }
     else
       setMessage("Please fill all input boxes or check them if they are correct!");
   }

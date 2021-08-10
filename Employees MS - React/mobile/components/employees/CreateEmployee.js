@@ -50,6 +50,7 @@ export default function CreateEmployee() {
   
   const handleSubmit=async () => {
     if(name&&validateEmail(email)&&adress&&job_title&&validateDate(hire_date)&&validatePositiveNumber(salary))
+    {
       await mutation({variables: {
           name: name.trim(),
           email: email.trim(),
@@ -59,8 +60,10 @@ export default function CreateEmployee() {
           salary: Math.abs(salary),
           project_id: project_id
       }})
-          .then(response => setMessage("Succeeded!"))
-          .catch(err => setMessage(err.message));
+        .then(response => setMessage("Succeeded!"))
+        .catch(err => setMessage(err.message));
+      window.location.reload(false);
+    }
     else
       setMessage("Please fill all input boxes or check them if they are correct!");
   }

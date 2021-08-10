@@ -41,15 +41,46 @@ const SHOW_EMPLOYEES=gql`
     }
 `;
 
+const SHOW_PROJECTS=gql`
+    query {
+      projects {
+        _id
+        project_name
+      }
+    }
+`;
+
 export default function UpdateEmployee() {
   const [mutation] = useMutation(UPDATE_EMPLOYEE);
   const { data } = useQuery(SHOW_EMPLOYEES);
   const [message,setMessage]=useState("");
 
   let project_id,_id,name,email,adress,job_title,hire_date,salary;
+
+  const ShowProjects = () => {
+    const { data } = useQuery(SHOW_PROJECTS);
+    return(
+      <View>
+      {
+        (data) ? (
+          <RNPickerSelect
+            placeholder=""
+            onValueChange={value => project_id=value}
+            items={
+              data.projects.map(project => {
+              return({
+                label: project.project_name, value: project._id
+              });
+            })
+          }
+          />) : (<></>)
+      }</View>
+    );
+  }
   
   const handleSubmit=async () => {
     if(_id&&name&&validateEmail(email)&&adress&&job_title&&validateDate(hire_date)&&validatePositiveNumber(salary))
+    {
       await mutation({variables: {
           name: name.trim(),
           email: email.trim(),
@@ -60,8 +91,10 @@ export default function UpdateEmployee() {
           project_id: project_id,
           _id: _id
       }})
-          .then(response => setMessage("Succeeded!"))
-          .catch(err => setMessage(err.message));
+        .then(response => setMessage("Succeeded!"))
+        .catch(err => setMessage(err.message));
+      window.location.reload(false);
+    }
     else
       setMessage("Please fill all input boxes or check them if they are correct!");
   }
@@ -86,7 +119,8 @@ export default function UpdateEmployee() {
           />) : (<></>)
         }
       </View>
-      <TextInput onChangeText={text => project_id=text} style={styles.input} placeholder="Project ID"/>
+      <Text style={{marginBottom: "10px"}}>Project:</Text>
+      <ShowProjects/>
       <TextInput onChangeText={text => name=text} style={styles.input} placeholder="Name"/>
       <TextInput onChangeText={text => email=text} style={styles.input} placeholder="Email"/>
       <TextInput onChangeText={text => adress=text} style={styles.input} placeholder="Adress"/>

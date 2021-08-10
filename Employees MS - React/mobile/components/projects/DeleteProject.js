@@ -41,11 +41,14 @@ export default function DeleteProject() {
   
   const handleSubmit=async () => {
     if(_id)
+    {
       await mutation({variables: {
           _id: _id
       }})
-          .then(response => setMessage("Sucessfully deleted!"))
-          .catch(err => setMessage(err.message));
+        .then(response => setMessage("Sucessfully deleted!"))
+        .catch(err => setMessage(err.message));
+      window.location.reload(false);
+    }
     else
       setMessage("Please fill all input boxes or check them if they are correct!");
   }

@@ -42,11 +42,14 @@ export default function DeleteEmployee() {
   
   const handleSubmit=async () => {
     if(_id)
+    {
       await mutation({variables: {
           _id: _id
       }})
-          .then(response => setMessage("Successfully deleted!"))
-          .catch(err => setMessage(err.message));
+        .then(response => setMessage("Successfully deleted!"))
+        .catch(err => setMessage(err.message));
+      window.location.reload(false);
+    }
     else
       setMessage("Please fill all input boxes or check them if they are correct!");
   }
