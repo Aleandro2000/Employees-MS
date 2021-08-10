@@ -2,20 +2,23 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View, Image, Button } from 'react-native';
 
-export default function EmployeesMenu() {
+export default function EmployeesMenu({navigation}) {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../resources/employee.png")}/>
       <View style={{marginBottom: "25px"}}>
-        <Button title="CREATE EMPLOYEE"/>
+        <Button title="DISPLAY EMPLOYEES" onPress={() => navigation.navigate('Display Employees')}/>
       </View>
       <View style={{marginBottom: "25px"}}>
-        <Button title="READ EMPLOYEE"/>
+        <Button title="CREATE EMPLOYEE" onPress={() => navigation.navigate('Create Employee')}/>
       </View>
       <View style={{marginBottom: "25px"}}>
-        <Button title="UPDATE EMPLOYEE"/>
+        <Button title="READ EMPLOYEE" onPress={() => navigation.navigate('Read Employee')}/>
       </View>
-      <Button title="DELETE EMPLOYEE"/>
+      <View style={{marginBottom: "25px"}}>
+        <Button title="UPDATE EMPLOYEE" onPress={() => navigation.navigate('Update Employee')}/>
+      </View>
+      <Button title="DELETE EMPLOYEE" onPress={() => navigation.navigate('Delete Employee')}/>
       <StatusBar style="auto" />
     </View>
   );
