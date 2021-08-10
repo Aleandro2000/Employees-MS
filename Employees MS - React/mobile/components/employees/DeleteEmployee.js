@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Button, TextInput, Text, Alert } from 'react-native';
+import { StyleSheet, View, Image, Button, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {
     useMutation,
     useQuery,
     gql
 } from "@apollo/client";
-import { validateDate,validateEmail,validatePositiveNumber,convertDate } from "../../utils";
 
 const DELETE_EMPLOYEE = gql`
     mutation DeleteEmployee($_id: ID!) {
@@ -35,7 +34,7 @@ const SHOW_EMPLOYEES=gql`
 `;
 
 export default function DeleteEmployee() {
-  const [createEmployee] = useMutation(DELETE_EMPLOYEE);
+  const [mutation] = useMutation(DELETE_EMPLOYEE);
   const { data } = useQuery(SHOW_EMPLOYEES);
   const [message,setMessage]=useState("");
 
@@ -43,7 +42,7 @@ export default function DeleteEmployee() {
   
   const handleSubmit=async () => {
     if(_id)
-      await createEmployee({variables: {
+      await mutation({variables: {
           _id: _id
       }})
           .then(response => setMessage("Successfully deleted!"))

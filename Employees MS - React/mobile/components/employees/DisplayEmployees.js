@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View, Image, RefreshControl, ScrollView } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { useQuery,gql } from "@apollo/client";

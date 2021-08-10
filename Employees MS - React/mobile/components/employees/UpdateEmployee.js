@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Button, TextInput, Text, Alert } from 'react-native';
+import { StyleSheet, View, Image, Button, TextInput, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {
     useMutation,
@@ -42,7 +42,7 @@ const SHOW_EMPLOYEES=gql`
 `;
 
 export default function UpdateEmployee() {
-  const [createEmployee] = useMutation(UPDATE_EMPLOYEE);
+  const [mutation] = useMutation(UPDATE_EMPLOYEE);
   const { data } = useQuery(SHOW_EMPLOYEES);
   const [message,setMessage]=useState("");
 
@@ -50,7 +50,7 @@ export default function UpdateEmployee() {
   
   const handleSubmit=async () => {
     if(_id&&name&&validateEmail(email)&&adress&&job_title&&validateDate(hire_date)&&validatePositiveNumber(salary))
-      await createEmployee({variables: {
+      await mutation({variables: {
           name: name.trim(),
           email: email.trim(),
           adress: adress,

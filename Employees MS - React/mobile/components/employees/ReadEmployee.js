@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Button, TextInput, Text, Alert } from 'react-native';
+import { StyleSheet, View, Image, Button, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {
     useMutation,
     useQuery,
     gql
 } from "@apollo/client";
-import { validateDate,validateEmail,validatePositiveNumber,convertDate } from "../../utils";
 
 const READ_EMPLOYEE = gql`
     mutation ReadEmployee($_id: ID!) {
@@ -35,7 +34,7 @@ const SHOW_EMPLOYEES=gql`
 `;
 
 export default function ReadEmployee() {
-  const [createEmployee] = useMutation(READ_EMPLOYEE);
+  const [mutation] = useMutation(READ_EMPLOYEE);
   const { data } = useQuery(SHOW_EMPLOYEES);
   const [message,setMessage]=useState("");
 
@@ -43,10 +42,10 @@ export default function ReadEmployee() {
   
   const handleSubmit=async () => {
     if(_id)
-      await createEmployee({variables: {
+      await mutation({variables: {
           _id: _id
       }})
-          .then(response => setMessage(JSON.stringify(response)))
+          .then(response => setMessage(JSON.stringify(response.data.readEmployee)))
           .catch(err => setMessage(err.message));
     else
       setMessage("Please fill all input boxes or check them if they are correct!");

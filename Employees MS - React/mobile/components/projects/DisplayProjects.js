@@ -1,22 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View, Image, Button } from 'react-native';
+import { StyleSheet, View, Image, RefreshControl, ScrollView } from 'react-native';
+import { DataTable } from 'react-native-paper';
+import { useQuery,gql } from "@apollo/client";
 
-export default function DisplayProjects() {
+const SHOW_PROJECTS=gql`
+    query {
+      projects {
+        _id
+        project_name
+        start_date
+        planned_end_date
+        description
+        project_code
+      }
+    }
+`;
+
+export default function DisplayEmployees() {
+  function EmployeesTableContent(){
+      const { loading, error, data } = useQuery(SHOW_PROJECTS);
+      if (loading)
+        return <DataTable.Row><DataTable.Cell>Loading...</DataTable.Cell></DataTable.Row>;
+      if (error)
+      return <DataTable.Row><DataTable.Cell>Error :(</DataTable.Cell></DataTable.Row>;
+    
+      return data.projects.map((project) => (
+        <DataTable.Row key={employee._id}>
+          <DataTable.Cell>{project._id}</DataTable.Cell>
+          <DataTable.Cell>{project.project_name}</DataTable.Cell>
+          <DataTable.Cell>{project.start_date}</DataTable.Cell>
+          <DataTable.Cell>{project.planned_end_date}</DataTable.Cell>
+          <DataTable.Cell>{project.description}</DataTable.Cell>
+          <DataTable.Cell>{project.project_code}</DataTable.Cell>
+        </DataTable.Row>
+      ));
+    }
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../resources/employee.png")}/>
-      <View style={{marginBottom: "25px"}}>
-        <Button title="CREATE EMPLOYEE"/>
-      </View>
-      <View style={{marginBottom: "25px"}}>
-        <Button title="READ EMPLOYEE"/>
-      </View>
-      <View style={{marginBottom: "25px"}}>
-        <Button title="UPDATE EMPLOYEE"/>
-      </View>
-      <Button title="DELETE EMPLOYEE"/>
-      <StatusBar style="auto" />
+        <ScrollView style={{overflow: "scroll",width: "100%"}}>
+            <DataTable>
+              <DataTable.Header>
+                  <DataTable.Title scope="col">ID</DataTable.Title>
+                  <DataTable.Title scope="col">Project Name</DataTable.Title>
+                  <DataTable.Title scope="col">Start Date</DataTable.Title>
+                  <DataTable.Title scope="col">Planned End Date</DataTable.Title>
+                  <DataTable.Title scope="col">Description</DataTable.Title>
+                  <DataTable.Title scope="col">Project Code</DataTable.Title>
+              </DataTable.Header>
+              <EmployeesTableContent/>
+            </DataTable>
+        </ScrollView>
     </View>
   );
 }
