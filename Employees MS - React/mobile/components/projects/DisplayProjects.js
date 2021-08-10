@@ -22,7 +22,7 @@ export default function DisplayEmployees() {
       if (loading)
         return <DataTable.Row><DataTable.Cell>Loading...</DataTable.Cell></DataTable.Row>;
       if (error)
-      return <DataTable.Row><DataTable.Cell>Error :(</DataTable.Cell></DataTable.Row>;
+        return <DataTable.Row><DataTable.Cell>Error :(</DataTable.Cell></DataTable.Row>;
     
       return data.projects.map((project) => (
         <DataTable.Row key={project._id}>

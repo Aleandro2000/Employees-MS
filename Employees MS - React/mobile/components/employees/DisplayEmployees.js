@@ -30,7 +30,7 @@ export default function DisplayEmployees() {
       if (loading)
         return <DataTable.Row><DataTable.Cell>Loading...</DataTable.Cell></DataTable.Row>;
       if (error)
-      return <DataTable.Row><DataTable.Cell>Error :(</DataTable.Cell></DataTable.Row>;
+        return <DataTable.Row><DataTable.Cell>Error :(</DataTable.Cell></DataTable.Row>;
     
       return data.employees.map((employee) => (
         <DataTable.Row key={employee._id}>
