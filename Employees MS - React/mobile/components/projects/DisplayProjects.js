@@ -25,7 +25,7 @@ export default function DisplayEmployees() {
       return <DataTable.Row><DataTable.Cell>Error :(</DataTable.Cell></DataTable.Row>;
     
       return data.projects.map((project) => (
-        <DataTable.Row key={employee._id}>
+        <DataTable.Row key={project._id}>
           <DataTable.Cell>{project._id}</DataTable.Cell>
           <DataTable.Cell>{project.project_name}</DataTable.Cell>
           <DataTable.Cell>{project.start_date}</DataTable.Cell>
