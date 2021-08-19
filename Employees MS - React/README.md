@@ -1,4 +1,4 @@
 # Alexandru-Andrei Carmici
 
-# Project: Employees MS (Task 2)
+# Project: Employees MS
 # Used Stack: ReactJS,NodeJS,MongoDB,GraphQL,Express,Bootstrap,React Native

@@ -1,4 +1,0 @@
-Urmatorul task implica adaugarea autentificarii in aplicate (frontend + backend). Pentru a realiza aceasta parte avem nevoie de doua pagini noi (register si login). Fara ca un utilizator sa fie autentificat, acesta nu va putea accesa celelalte pagini
-De asemenea, parolele trebuiesc criptate in backend
-
-Hint; pentru protejarea din frontend, puteti utiliza un token jwt 

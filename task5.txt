@@ -1,1 +1,0 @@
-Aplicatie pentru telefonul mobil in React Native.
